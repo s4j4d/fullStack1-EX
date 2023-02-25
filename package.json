@@ -1,0 +1,28 @@
+{
+  "name": "fullstack1-ex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MapsaBootCamp/fullStack1-EX.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MapsaBootCamp/fullStack1-EX/issues"
+  },
+  "homepage": "https://github.com/MapsaBootCamp/fullStack1-EX#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "http-status-codes": "^2.2.0",
+    "sqlite3": "^5.1.4",
+    "url-parse": "^1.5.10"
+  }
+}
