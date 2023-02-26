@@ -23,3 +23,5 @@ const db = new sqlite3.Database(DBFILENAME,(err)=>{
         })
     }
 })
+
+module.exports = db;
