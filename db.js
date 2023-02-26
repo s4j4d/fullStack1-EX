@@ -11,20 +11,19 @@ const db = new sqlite3.Database(DBFILENAME, (err) => {
       db.run(`CREATE TABLE IF NOT EXISTS User(
                           userID INTEGER PRIMARY KEY,
                           username TEXT NOT NULL UNIQUE ,
-                          password TEXT 
+                          password TEXT ,
+                          booksBorrowed INTEGER NOT NULL CHECK (booksBorrowed IN (0,1,2,3))
               )`);
       db.run(`CREATE TABLE IF NOT EXISTS Book(
                         specialID INTEGER PRIMARY KEY UNIQUE,
-                        bookID INTEGER ,
-                        entity INTEGER NOT NULL,
+                        bookID INTEGER NOT NULL ,
                         title TEXT NOT NULL,
                         author TEXT NOT NULL,
-                        description TEXT ,
                         isBorrowed BOOLEAN NOT NULL ,
-                        borrowerID INTEGER
-
-                        
-                        
+                        borrowerID INTEGER,
+                        FOREIGN KEY (borrowerID)
+                          REFERENCES User(userID)
+                                                
             )`);
     });
   }
