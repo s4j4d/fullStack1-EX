@@ -1,6 +1,6 @@
 const {StatusCodes} =require('http-status-codes'),
-url = require('url-parse')
-// uitls = require('./utils.js');
+url = require('url-parse'),
+utils = require('./utils');
 
 const routing ={
     "GET": {},
@@ -9,6 +9,24 @@ const routing ={
     "PATCH": {},
     "DELETE": {}
 };
+
+exports.handler = async (req, res) => {
+  try {
+    req.path = url.parse(req.url).pathname;
+    req.query = utils.parseQueryFromUrl(url.parse(req.url). query);
+    res.json=(data) => utils.jsonSerialize(data, res);
+    req.body = null
+
+    if(req.header["content-type"] === "application/js")
+      req.body = await utils.parseJsonBody(req);  
+    
+    routing[req.method][req.path](req, res);
+    
+  } catch (error) {
+    res.writeHead(StatusCodes.NOT_FOUND);
+    return utils.errResponse(res, error.message);
+  }
+}
 
 
 exports.get = (url, action) => {
