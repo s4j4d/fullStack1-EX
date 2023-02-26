@@ -19,6 +19,7 @@ exports.handler = async (req, res) => {
 
     if (req.headers["content-type"] === "application/json")
       req.body = await utils.parseJsonBody(req);
+
     routing[req.method][req.path](req, res);
   } catch (error) {
     res.writeHead(StatusCodes.NOT_FOUND);

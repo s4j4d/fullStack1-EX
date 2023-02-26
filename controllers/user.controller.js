@@ -1,5 +1,7 @@
 const { StatusCodes } = require("http-status-codes"),
-  db = require("../db");
+  db = require("../db"),
+  utils = require("../utils"),
+  { getUserByUsername } = require("./user.service");
 
 exports.register = (req, res) => {
   const { username } = req.body;
@@ -27,4 +29,26 @@ exports.register = (req, res) => {
       }
     });
   }
+};
+
+exports.getUser = async (req, res) => {
+  //   const username = req.url.replace("/user/user-detail?username=", "");
+  const username = req.query["username"];
+  const userObj = await getUserByUsername(username);
+  if (!userObj) {
+    res.writeHead(StatusCodes.NOT_FOUND, contentTypes.json);
+    return utils.errResponse(res, "chenin useri nadarim");
+  } else {
+    res.json(userObj);
+  }
+};
+
+exports.userList = async (req, res) => {
+  db.all("SELECT userID, username FROM User", (err, users) => {
+    if (err) {
+      throw new Error(err.message);
+    } else {
+      res.json(users);
+    }
+  });
 };
