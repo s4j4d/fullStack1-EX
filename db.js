@@ -25,6 +25,15 @@ const db = new sqlite3.Database(DBFILENAME, (err) => {
                           REFERENCES User(userID)
                                                 
             )`);
+      // db.run(`CREATE TABLE IF NOT EXISTS Rent(
+      //   rentID INTEGER PRIMARY KEY,
+      //   book INTEGER NOT NULL,
+      //   user INTEGER NOT NULL,
+      //   FOREIGN KEY (user)
+      //               REFERENCE User(userID),
+      //   FOREIGN KEY (book)
+      //               REFERENCE Book(bookID)
+      // )`);
     });
   }
 });

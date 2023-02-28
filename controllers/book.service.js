@@ -18,4 +18,17 @@ function createBook(bookObj){
 
     
 }
-module.exports = {createBook}
+
+function getbookByID(id){
+    return new Promise((resolve, reject)=>{
+        db.get("SELECT * FROM Book WHERE bookID=?", id, (err, book)=>{
+            if(err){
+                reject(err)
+            }else{
+                resolve(book)
+            }
+        })
+    })
+}
+
+module.exports = {createBook,getbookByID}

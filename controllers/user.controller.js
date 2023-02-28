@@ -4,7 +4,10 @@ const { StatusCodes } = require("http-status-codes"),
   { getUserByUsername } = require("./user.service");
 
 exports.register = (req, res) => {
-  const { username } = req.body;
+  const {username}= req.body;
+ 
+
+  
 
   if (!username) {
     res.writeHead(StatusCodes.BAD_REQUEST);
@@ -14,8 +17,10 @@ exports.register = (req, res) => {
 
       message: "username ejbari ast!",
     });
+  
   } else {
-    db.run(`INSERT INTO User(username) VALUES(?)`, [username], (err) => {
+
+    db.run(`INSERT INTO User(username, booksBorrowed) VALUES(?, ?)`, [username,0], (err) => {
       if (err) {
         return res.json({
           error: true,
@@ -25,7 +30,7 @@ exports.register = (req, res) => {
       } else {
         res.writeHead(StatusCodes.CREATED);
 
-        return res.end("user sakhte shod");
+        return res.end(`user ${username} sakhte shod`);
       }
     });
   }
