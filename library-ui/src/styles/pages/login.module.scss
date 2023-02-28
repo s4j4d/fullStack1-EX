@@ -1,0 +1,67 @@
+input,
+label {
+  display: block;
+  margin: 0.65rem 0;
+  width: 100%;
+}
+
+.login_wrapper {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.login_title {
+  margin-bottom: 2rem;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &__user {
+    width: 50%;
+    margin: 0 auto;
+
+    &__input {
+      padding: 0.75rem 1.1rem;
+      border: none;
+      border-radius: 0.3rem;
+    }
+  }
+
+  &__pass {
+    width: 50%;
+    margin: 0 auto;
+
+    &__input {
+      padding: 0.75rem 1.1rem;
+      border: none;
+      border-radius: 0.3rem;
+    }
+  }
+
+  &__btn {
+    display: block;
+    width: 15%;
+    cursor: pointer;
+    margin: 1rem auto 0 auto;
+    padding: 0.55rem 0.75rem;
+    transition: all 0.3s;
+    background-color: var(--primaryPurple);
+    border: none;
+    color: var(--white);
+    border-radius: 5px;
+    font-size: 1.3rem;
+    text-align: center;
+    text-decoration: none;
+
+    &:hover {
+      background-color: var(--bg-3);
+    }
+  }
+}
