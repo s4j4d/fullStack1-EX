@@ -1,4 +1,7 @@
 
+// بشه رو در نظر نگرفتی که باید کلا ریجکت بشه reject توی این سوال حالتی که یکیشون 
+
+
 // p1 = new Promise((resolve, reject)=> resolve(50));
 p2 = 200;
 p3 = new Promise(function(resolve, reject) {
