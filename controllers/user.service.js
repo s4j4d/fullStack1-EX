@@ -11,5 +11,20 @@ function getUserByUsername (username){
         })
     })
 }
+function getUserByID(id){
+    return new Promise((resolve, reject) => {
+      db.get("SELECT * FROM User WHERE userID=?", id, (err, user) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(user);
+        }
+      });
+    });
+}
 
-module.exports= {getUserByUsername}
+const numberOfBorrowedBooks= async (userID)=>{
+    userObj= await getUserByID(userID)
+}
+
+module.exports= {getUserByUsername,getUserByID}
