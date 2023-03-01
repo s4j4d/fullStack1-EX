@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 
 route.post("/user/register", userController.register);
 route.get("/user/user-list", userController.userList);
-route.get("/user/user-detail", userController.getUser);
+route.get("/user/user-detail", userController.getUserWithUsername);
 route.get("/user/user-books", {});
 
 // book routes : add book ,  , book list, book detail

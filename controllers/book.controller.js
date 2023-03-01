@@ -1,7 +1,6 @@
 const { contentTypes } = require("../content-types"),
   db = require("../db"),
   utils = require("../utils"),
-  userService = require("./user.service"),
   { StatusCodes } = require("http-status-codes"),
   { createBook, getbookByID } = require("./book.service");
 
@@ -20,13 +19,15 @@ exports.findBookObj = async (req, res) => {
   }
 };
 
+
+
 exports.addBook = async (req, res) => {
   const body = req.body;
   if (!body) {
     return utils.errResponse(err, "for add book send data");
   } else {
     try {
-      const {title, author } = body;
+      const { title, author } = body;
       const bookObj = {
         title: title,
         author: author,

@@ -1,7 +1,7 @@
 const { StatusCodes } = require("http-status-codes"),
   db = require("../db"),
   utils = require("../utils"),
-  { getUserByUsername } = require("./user.service");
+  { getUserByUsername,getUserByID } = require("./user.service");
   const contentTypes= require('../content-types');
 
 exports.register = (req, res) => {
@@ -36,7 +36,7 @@ exports.register = (req, res) => {
   }
 };
 
-exports.getUser = async (req, res) => {
+exports.getUserWithUsername = async (req, res) => {
   //   const username = req.url.replace("/user/user-detail?username=", "");
   const username = req.query["username"];
   const userObj = await getUserByUsername(username);
@@ -47,6 +47,19 @@ exports.getUser = async (req, res) => {
     res.json(userObj);
   }
 };
+
+exports.getUserWithID = async (req, res) => {
+  const userID = req.query["id"];
+  const userObj = await getUserByID(userID);
+  if (!userObj) {
+    res.writeHead(StatusCodes.NOT_FOUND, contentTypes.json);
+    return utils.errResponse(res, "chenin useri nadarim");
+  } else {
+    res.json(userObj);
+  }
+};
+
+
 
 exports.userList = async (req, res) => {
   db.all("SELECT userID, username FROM User", (err, users) => {
