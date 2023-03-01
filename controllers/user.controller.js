@@ -2,12 +2,10 @@ const { StatusCodes } = require("http-status-codes"),
   db = require("../db"),
   utils = require("../utils"),
   { getUserByUsername } = require("./user.service");
+  const contentTypes= require('../content-types');
 
 exports.register = (req, res) => {
-  const {username}= req.body;
- 
-
-  
+  const { username } = req.body;
 
   if (!username) {
     res.writeHead(StatusCodes.BAD_REQUEST);
@@ -17,22 +15,24 @@ exports.register = (req, res) => {
 
       message: "username ejbari ast!",
     });
-  
   } else {
+    db.run(
+      `INSERT INTO User(username, booksBorrowed) VALUES(?, ?)`,
+      [username, 0],
+      (err) => {
+        if (err) {
+          return res.json({
+            error: true,
 
-    db.run(`INSERT INTO User(username, booksBorrowed) VALUES(?, ?)`, [username,0], (err) => {
-      if (err) {
-        return res.json({
-          error: true,
+            message: err.message,
+          });
+        } else {
+          res.writeHead(StatusCodes.CREATED);
 
-          message: err.message,
-        });
-      } else {
-        res.writeHead(StatusCodes.CREATED);
-
-        return res.end(`user ${username} sakhte shod`);
+          return res.end(`user ${username} sakhte shod`);
+        }
       }
-    });
+    );
   }
 };
 
