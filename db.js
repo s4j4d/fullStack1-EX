@@ -15,8 +15,7 @@ const db = new sqlite3.Database(DBFILENAME, (err) => {
                           booksBorrowed INTEGER NOT NULL CHECK (booksBorrowed IN (0,1,2,3))
               )`);
       db.run(`CREATE TABLE IF NOT EXISTS Book(
-                        specialID INTEGER PRIMARY KEY UNIQUE,
-                        bookID INTEGER NOT NULL ,
+                        bookID INTEGER PRIMARY KEY UNIQUE ,
                         title TEXT NOT NULL,
                         author TEXT NOT NULL,
                         isBorrowed BOOLEAN NOT NULL ,
@@ -25,15 +24,16 @@ const db = new sqlite3.Database(DBFILENAME, (err) => {
                           REFERENCES User(userID)
                                                 
             )`);
-      // db.run(`CREATE TABLE IF NOT EXISTS Rent(
-      //   rentID INTEGER PRIMARY KEY,
-      //   book INTEGER NOT NULL,
-      //   user INTEGER NOT NULL,
-      //   FOREIGN KEY (user)
-      //               REFERENCE User(userID),
-      //   FOREIGN KEY (book)
-      //               REFERENCE Book(bookID)
-      // )`);
+      db.run(`CREATE TABLE IF NOT EXISTS Lend(
+        lendID INTEGER PRIMARY KEY,
+        bookTitle TEXT NOT NULL,
+        book INTEGER NOT NULL,        
+        user INTEGER NOT NULL,
+        FOREIGN KEY (user)
+                    REFERENCES User(userID),
+        FOREIGN KEY (book)
+                    REFERENCES Book(bookID)
+      )`);
     });
   }
 });
