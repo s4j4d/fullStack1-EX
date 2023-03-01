@@ -2,6 +2,8 @@
 // console.log(letter.replace('@','*'));
 // console.log(letter);
 
+// جواب سوال در بیادeval خیلی خوبه فقط همین کارو باید بیشتر انجام بدی تا بدون 
+
 function changeSign(letter){
     switch(letter){
         case '#':
